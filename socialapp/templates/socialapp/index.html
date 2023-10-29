@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Social App</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'socialapp/style.css' %}">
 </head>
 <body>
 {% if latest_question_list %}
