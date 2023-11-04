@@ -7,8 +7,8 @@
 # *Description*
 ### With this app, admin can add a post that has title input, description input, image input, and set choices to vote on in each post
 ### Users can log in and see the admin posts and vote on the choices
-# *PIP Install Instructions*
-Please copy the following command in the terminal for all the packages needed to run the program:
+# *Social App Install Instructions*
+Please copy the following command in the terminal for all the package downloads needed to run the program:
 ```
 pip install -r requirements.txt
 ```
