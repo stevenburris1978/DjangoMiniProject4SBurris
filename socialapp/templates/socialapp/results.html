@@ -3,16 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Results</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'socialapp/style.css' %}">
 </head>
 <body>
-<h1>{{ question.question_text }}</h1>
+<fieldset>
+<legend><h1>{{ socialpost.post_title }}</h1></legend>
 
 <ul>
-{% for choice in question.choice_set.all %}
+{% for choice in socialpost.choice_set.all %}
     <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
 {% endfor %}
 </ul>
+</fieldset>
+<nav>
+<button type="button" class="btn btn-primary" onclick="window.location.href = '{% url 'socialapp:detail' socialpost.id%}'">Vote Again</button>
+<button type="button" class="btn btn-primary" onclick="window.location.href = '{% url 'socialapp:index' %}'">Home</button>
+</nav>
 
-<a href="{% url 'socialapp:detail' question.id %}">Vote again?</a>
 </body>
 </html>

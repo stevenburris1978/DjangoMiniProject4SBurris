@@ -2,20 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Social App</title>
+    <title>Social App Home</title>
     {% load static %}
 
     <link rel="stylesheet" href="{% static 'socialapp/style.css' %}">
 </head>
 <body>
-{% if latest_question_list %}
+<h1>Social App Home</h1>
+<h2>All Posts</h2>
+{% if latest_socialpost_list %}
     <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'socialapp:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% for socialpost in latest_socialpost_list %}
+        <li><a href="{% url 'socialapp:detail' socialpost.id %}">{{ socialpost.post_title }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
-    <p>No polls are available.</p>
+    <p>No posts are available.</p>
 {% endif %}
+
+<p>{{ socialpost.content }}</p>
+
+{% if socialpost.image %}
+    <img src="{{ socialpost.image.url }}" alt="{{ socialpost.post_image }} Image">
+{% endif %}
+
 </body>
 </html>

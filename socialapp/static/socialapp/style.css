@@ -3,5 +3,18 @@ li a {
 }
 
 body {
-    background: white url("images/background.png") no-repeat;
+    background: white url("images/background.png") no-repeat center center fixed;
+    background-size: cover;
+    margin: 1rem;
+    padding: 1rem;
+    height: 100%;
+    width: 100%;
+}
+
+nav {
+    padding: 1rem;
+}
+
+h2 {
+    padding: .5rem;
 }
