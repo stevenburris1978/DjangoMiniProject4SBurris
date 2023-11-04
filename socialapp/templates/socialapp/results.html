@@ -9,13 +9,18 @@
 </head>
 <body>
 <fieldset>
-<legend><h1>{{ socialpost.post_title }}</h1></legend>
-
-<ul>
-{% for choice in socialpost.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul>
+    <legend><h1>{{ socialpost.post_title }}</h1></legend>
+    {% if socialpost.image %}
+        <img src="{{ socialpost.image.url }}" alt="{{ socialpost.post_title }}">
+    {% endif %}
+    <h4>Description:</h4>
+    <p>{{ socialpost.description }}</p>
+    <h4>Votes:</h4>
+    <ul>
+    {% for choice in socialpost.choice_set.all %}
+        <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+    {% endfor %}
+    </ul>
 </fieldset>
 <nav>
 <button type="button" class="btn btn-primary" onclick="window.location.href = '{% url 'socialapp:detail' socialpost.id%}'">Vote Again</button>

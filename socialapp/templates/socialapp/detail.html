@@ -12,14 +12,22 @@
 {% csrf_token %}
 <fieldset>
     <legend><h1>{{ socialpost.post_title }}</h1></legend>
+    {% if socialpost.image %}
+        <img src="{{ socialpost.image.url }}" alt="{{ socialpost.post_title }}">
+    {% endif %}
+    <h4>Description:</h4>
+    <p>{{ socialpost.description }}</p>
+    <h4>Published On:</h4>
+    <p>{{ socialpost.pub_date }}</p>
+    <h4>Click To Vote:</h4>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     {% for choice in socialpost.choice_set.all %}
         <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
         <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
     {% endfor %}
+    <input type="submit" value="Vote">
 </fieldset>
 <nav>
-<input type="submit" value="Vote">
 <button type="button" class="btn btn-primary" onclick="window.location.href = '{% url 'socialapp:results' socialpost.id%}'">See Votes</button>
 <button type="button" class="btn btn-primary" onclick="window.location.href = '{% url 'socialapp:index' %}'">Home</button>
 </nav>

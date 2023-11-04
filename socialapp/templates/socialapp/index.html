@@ -10,21 +10,24 @@
 <body>
 <h1>Social App Home</h1>
 <h2>All Posts</h2>
-{% if latest_socialpost_list %}
-    <ul>
-    {% for socialpost in latest_socialpost_list %}
-        <li><a href="{% url 'socialapp:detail' socialpost.id %}">{{ socialpost.post_title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No posts are available.</p>
-{% endif %}
 
-<p>{{ socialpost.content }}</p>
-
-{% if socialpost.image %}
-    <img src="{{ socialpost.image.url }}" alt="{{ socialpost.post_image }} Image">
-{% endif %}
-
+    {% if latest_socialpost_list %}
+        <ul>
+        {% for socialpost in latest_socialpost_list %}
+            <li>
+                <fieldset>
+                <legend><h2><a href="{% url 'socialapp:detail' socialpost.id %}">{{ socialpost.post_title }}</a></h2></legend>
+                {% if socialpost.image %}
+                    <img src="{{ socialpost.image.url }}" alt="{{ socialpost.post_title }}">
+                {% endif %}
+                <h4>Description:</h4>
+                <p>{{ socialpost.description }}</p>
+                </fieldset>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No posts are available.</p>
+    {% endif %}
 </body>
 </html>
