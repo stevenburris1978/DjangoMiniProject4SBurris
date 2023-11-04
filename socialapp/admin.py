@@ -15,7 +15,7 @@ class ChoiceInline(admin.TabularInline):
 
 class PostAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {"fields": ["post_title"]}),
+        (None, {"fields": ["post_title", "description", "image"]}),
         ("Date information", {"fields": ["pub_date"], "classes": ["collapse"]}),
     ]
     inlines = [ChoiceInline]

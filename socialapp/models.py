@@ -6,7 +6,7 @@ from django.utils import timezone
 
 class Socialpost(models.Model):
     post_title = models.CharField(max_length=200)
-    content = models.TextField()
+    description = models.TextField()
     image = models.ImageField(upload_to='socialposts/images/', blank=True, null=True)
     pub_date = models.DateTimeField("date published")
 
