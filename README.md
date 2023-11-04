@@ -28,7 +28,7 @@ python manage.py migrate
 ```
 
 ## How to create the main admin user
-(this will create the administrator login for your /admin side of your project)
+(this will create the administrator login to log into the Social App administration page)
 ```
 python manage.py createsuperuser 
 ```
@@ -39,5 +39,5 @@ python manage.py createsuperuser
 python manage.py runserver
 ``` 
 
-# This is the link to go to the admin page to add, edit, and delete socialapp post items
+# This is the link to go to the admin page to add, edit, and delete the Social App post items
 Administration url : [Administration url](http://127.0.0.1:8000/admin)
