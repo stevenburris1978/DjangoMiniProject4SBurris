@@ -18,6 +18,18 @@ nav {
 h2 {
     padding: .5rem;
 }
+
 input {
     margin: .5rem;
+}
+
+fieldset {
+    border: 0.0625rem solid #000; /* Add a border to the <legend> element */
+    padding: 0.3125rem; /* Add some padding for spacing */
+    margin: .5rem;
+    border-radius: 0.3125rem;
+}
+
+ul {
+    list-style-type: none;
 }
