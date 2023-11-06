@@ -5,7 +5,7 @@
 # *Social App*
 
 # *Description*
-### With this app, admin can add a post that has title input, description input, image input, and set choices to vote on in each post
+### With this app, admin can add a post that has title input, description input, image input, and set choices for example, Like unlike, to vote on in each post
 ### Users can log in and see the admin posts and vote on the choices
 # *Social App Install Instructions*
 Please copy the following command in the terminal for all the package downloads needed to run the program:
