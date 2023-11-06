@@ -24,8 +24,8 @@ input {
 }
 
 fieldset {
-    border: 0.0625rem solid #000; /* Add a border to the <legend> element */
-    padding: 0.3125rem; /* Add some padding for spacing */
+    border: 0.0625rem solid #000;
+    padding: 0.3125rem;
     margin: .5rem;
     border-radius: 0.3125rem;
 }
