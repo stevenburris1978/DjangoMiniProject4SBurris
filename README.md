@@ -33,11 +33,11 @@ python manage.py migrate
 python manage.py createsuperuser 
 ```
 
-
 # Then start app
 ```
 python manage.py runserver
 ``` 
+and go to [ app home page](http://127.0.0.1:8000)
 
 # This is the link to go to the admin page to add, edit, and delete the Social App post items
 Administration url : [Administration url](http://127.0.0.1:8000/admin)

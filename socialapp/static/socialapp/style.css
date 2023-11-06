@@ -33,3 +33,10 @@ fieldset {
 ul {
     list-style-type: none;
 }
+
+button {
+   margin: .5rem;
+   border-radius: 0.3125rem;
+}
+
+

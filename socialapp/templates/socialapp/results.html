@@ -2,30 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- for different devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Results</title>
 
     {% load static %}
     <link rel="stylesheet" href="{% static 'socialapp/style.css' %}">
 </head>
 <body>
-<fieldset>
-    <legend><h1>{{ socialpost.post_title }}</h1></legend>
-    {% if socialpost.image %}
-        <img src="{{ socialpost.image.url }}" alt="{{ socialpost.post_title }}">
-    {% endif %}
-    <h4>Description:</h4>
-    <p>{{ socialpost.description }}</p>
-    <h4>Votes:</h4>
-    <ul>
-    {% for choice in socialpost.choice_set.all %}
-        <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-    {% endfor %}
-    </ul>
-</fieldset>
+<h1>Social App Post Votes</h1>
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}!</p>
+{% endif %}
+<form>
+    <fieldset>
+        <legend><h1>{{ socialpost.post_title }}</h1></legend>
+        {% if socialpost.image %}
+            <img src="{{ socialpost.image.url }}" alt="{{ socialpost.post_title }}">
+        {% endif %}
+        <h4>Description:</h4>
+        <p>{{ socialpost.description }}</p>
+        <h4>Votes:</h4>
+        <ul>
+        {% for choice in socialpost.choice_set.all %}
+            <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+        {% endfor %}
+        </ul>
+    </fieldset>
+</form>
 <nav>
-<button type="button" class="btn btn-primary" onclick="window.location.href = '{% url 'socialapp:detail' socialpost.id%}'">Vote Again</button>
-<button type="button" class="btn btn-primary" onclick="window.location.href = '{% url 'socialapp:index' %}'">Home</button>
+    <button type="button" class="btn btn-primary" onclick="window.location.href = '{% url 'socialapp:detail' socialpost.id%}'">Vote Again</button>
+    <button type="button" class="btn btn-primary" onclick="window.location.href = '{% url 'socialapp:index' %}'">Home</button>
+    {% if user.is_authenticated %}
+        {# Show the logout button if the user is authenticated #}
+        {% include 'socialapp/signout.html' %}
+    {% else %}
+        {# Show the login and signup links if the user is not authenticated #}
+        <a href="{% url 'socialapp:signin' %}">Sign In</a> | <a href="{% url 'socialapp:signup' %}">Sign Up</a>
+    {% endif %}
 </nav>
-
 </body>
 </html>

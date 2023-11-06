@@ -1,9 +1,12 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.views import generic
-
 from .models import Choice, Socialpost
+from django.contrib.auth import login, authenticate, logout
+from .forms import SignUpForm, SignInForm
 
 
 class IndexView(generic.ListView):
@@ -14,15 +17,27 @@ class IndexView(generic.ListView):
         """Return the last five published questions."""
         return Socialpost.objects.order_by("-pub_date")[:200]
 
+    @method_decorator(login_required(login_url='socialapp:signin'))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 
 class DetailView(generic.DetailView):
     model = Socialpost
     template_name = "socialapp/detail.html"
 
+    @method_decorator(login_required(login_url='socialapp:signin'))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 
 class ResultsView(generic.DetailView):
     model = Socialpost
     template_name = "socialapp/results.html"
+
+    @method_decorator(login_required(login_url='socialapp:signin'))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
 def vote(request, socialpost_id):
@@ -46,3 +61,35 @@ def vote(request, socialpost_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse("socialapp:results", args=(socialpost.id,)))
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('socialapp:index')
+    else:
+        form = SignUpForm()
+    return render(request, 'socialapp/signup.html', {'form': form})
+
+
+def signin(request):
+    if request.method == 'POST':
+        form = SignInForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user:
+                login(request, user)
+                return redirect('socialapp:index')
+    else:
+        form = SignInForm()
+    return render(request, 'socialapp/signin.html', {'form': form})
+
+
+def signout(request):
+    logout(request)
+    return redirect('socialapp:index')
