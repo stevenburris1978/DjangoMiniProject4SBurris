@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
@@ -85,8 +86,11 @@ def signin(request):
             if user:
                 login(request, user)
                 return redirect('socialapp:index')
+            else:
+                messages.error(request, 'Wrong username or password entered.')
     else:
         form = SignInForm()
+
     return render(request, 'socialapp/signin.html', {'form': form})
 
 
